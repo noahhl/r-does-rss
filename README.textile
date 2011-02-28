@@ -1,0 +1,7 @@
+<h1>r-does-rss: an ultra lightweight RSS reader for R</h1>
+
+r-does-rss is an incredibly lightweight RSS reader for the <a href="http://www.R-project.org/"> R statistical programming language </a>. It will parse RSS and Atom feeds and return a named list consisting of header information and a list of items. The specific contents of the items will vary based on the specification of the feed used.
+
+To use, simply source rss.R (package creation pending). Then, use getFeed(feed, auth) to get your feed. Auth is optional, and if used should be a single text string representing basic http-authenticated (in the form username:password).
+
+An sample usage is provided in rss_example.R. This example gets the Atom feed from <a href="http://crantastic.org">Crantastic.org</a> and the RSS feed from <a href="http://www.r-bloggers.com">R-bloggers.com</a> and prints updates since you last opened R (if unable to determine when you last opened R, prints updates from the last week). Try adding this to your .Rprofile!
