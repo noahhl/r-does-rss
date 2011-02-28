@@ -29,15 +29,7 @@ parseAtom <- function(content) {
 parseRSS <- function(content) {
   channel <- xmlToList(content$children$rss[['channel']])
   results <- list()
-  results$header <- list(title=channel$title, link=channel$link, description=channel$description, 
-                          language=channel$language, copyright=channel$copyright, 
-                          managingEditor=channel$managingEditors, webMaster=channel$webMaster, 
-                          pubDate=channel$pubDate, lastBuildDate=channel$lastBuildDate, 
-                          category=channel$category, generator=channel$generator, docs=channel$docs,
-                          cloud=channel$cloud, ttl=channel$ttl, image=channel$image, 
-                          rating=channel$rating, textInput=channel$textInput, 
-                          skipHours=channel$skipHours, skipDays=channel$skipDays)
-
+  results$header <- channel[names(channel) != "item"]
   results$items <- channel[names(channel) == "item"]
 
   return(results)
