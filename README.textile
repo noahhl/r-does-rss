@@ -10,6 +10,6 @@ To use, clone this repository, install the <code>rss</code> package and load it 
 
 Then, use getFeed(feed, auth) to get your feed. Auth is optional, and if used should be a single text string representing basic http-authenticated (in the form username:password).
 
-An sample usage is provided in demo/rss_example.R. This example gets the Atom feed from <a href="http://crantastic.org">Crantastic.org</a> and the RSS feed from <a href="http://www.r-bloggers.com">R-bloggers.com</a> and prints updates since you last opened R (if unable to determine when you last opened R, prints updates from the last week). 
+A sample usage is provided in demo/rss_example.R. This example gets the Atom feed from <a href="http://crantastic.org">Crantastic.org</a> and the RSS feed from <a href="http://www.r-bloggers.com">R-bloggers.com</a> and prints updates since you last opened R (if unable to determine when you last opened R, prints updates from the last week). 
 
 Feel free to fork and expand.
