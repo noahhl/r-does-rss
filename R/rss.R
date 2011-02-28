@@ -1,6 +1,7 @@
 library(RCurl)
 library(XML)
 
+
 getFeed <- function(feed, auth=NULL) {
   feed <- cleanFeedURL(feed)
   opts <- curlOptions()

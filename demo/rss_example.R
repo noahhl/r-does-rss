@@ -1,4 +1,3 @@
-
 since <- file.info("~/.Rapp.history")$ctime
 if(is.null(since))
 	since <- Sys.date - 7
@@ -15,10 +14,11 @@ for(i in 1:length(crantastic$items)) {
 }
 if(printed==0) 
 	toPrint <- paste(toPrint, "No new updates\n")
-cat(toPrint)
-
+cat(toPrint)	
 
 since <- file.info("~/.Rapp.history")$ctime
+if(is.null(since))
+	since <- Sys.date - 7
 rbloggers <- getFeed("feed://www.r-bloggers.com/feed/")
 
 toPrint <-"\nR-bloggers updates since your last use of R:\n"
@@ -31,4 +31,4 @@ for(i in 1:length(rbloggers$items)) {
 }
 if(printed==0) 
 	toPrint <- paste(toPrint, "No new updates\n")
-cat(toPrint)
+cat(toPrint)	
