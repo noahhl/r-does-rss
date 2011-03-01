@@ -4,6 +4,6 @@ Version: 0.1
 Date: 2011-02-27
 Author: Noah Lorang
 Maintainer: Noah Lorang <noah@noahhl.com>
-Description: This is an ultra-lightweight RSS / atom reader for R. It will parse RSS 2.0 and earlier and Atom feeds. Support is provided for feeds that require basic HTTP authentication.
+Description: This is an ultra-lightweight RSS / atom reader for R. It will parse RSS 2.0 and earlier and Atom feeds. Support is provided for feeds that require basic HTTP authentication. 
 Depends: RCurl, XML
 License: MIT
