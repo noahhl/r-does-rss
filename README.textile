@@ -1,14 +1,34 @@
 <h1>r-does-rss: an ultra lightweight RSS reader for R</h1>
 
-r-does-rss is an incredibly lightweight RSS reader for the <a href="http://www.R-project.org/"> R statistical programming language </a>. It will parse RSS and Atom feeds and return a named list consisting of header information and a list of items. The specific contents of the items will vary based on the specification of the feed used.
+r-does-rss is an incredibly lightweight RSS reader for the <a href="http://www.R-project.org/"> R statistical programming language </a>. It will parse RSS and Atom feeds and return a named list consisting of header information and a list of items. 
 
-To use, clone this repository, install the <code>rss</code> package and load it into your workspace:
-<pre>git clone git://github.com/noahhl/r-does-rss.git</pre>
-<pre>R CMD INSTALL r-does-rss</pre>
-<pre>library(rss)</pre>
+<hr><h2>Package information</h2>
+Package: rss
+Title: Lightweight RSS/Atom reader for R
+Version: 0.1
+Date: 2011-03-04
+Author: Noah Lorang
+Maintainer: Noah Lorang <noah@noahhl.com>
+Description: This is an ultra-lightweight RSS / atom reader for R. It will parse RSS 2.0 and earlier and Atom feeds. Support is provided for feeds that require basic HTTP authentication. 
+Depends: RCurl, XML
+License: MIT
 
-Then, use <code>getFeed(feed, auth)</code> to get your feed. Auth is optional, and if used should be a single text string representing basic http-authenticated (in the form username:password).
+<hr><h2>Installation instructions </h2>
+Clone this repository, install the <code>rss</code> package and load it into your workspace:
+<pre>git clone git://github.com/noahhl/r-does-rss.git
+R CMD INSTALL r-does-rss</pre>
 
-A sample usage is provided in <code>demo/rss_example.R</code>. This example gets the Atom feed from <a href="http://crantastic.org">Crantastic.org</a> and the RSS feed from <a href="http://www.r-bloggers.com">R-bloggers.com</a> and prints updates since you last opened R (if unable to determine when you last opened R, prints updates from the last week). 
+<hr><h2>Usage instructions</h2>
+The RSS reader can be loaded as <code>library(rss)</code>. 
 
-Feel free to fork and expand.
+<code>rss</code> has a single function, <code>getFeed(feed, auth)</code>, where <code>auth</code> represents an optional basic HTTP authentication string of the format <code>"username:password"</code>. It may be omitted.
+
+<code>getFeed()</code> returns a list containing a <code>header</code> and a list of <code>items</code>.
+
+Two demos are provided: <code>GetCrantastic()</code> and <code>GetRBloggers()</code>. These example get the Atom feed from <a href="http://crantastic.org">Crantastic.org</a> and the RSS feed from <a href="http://www.r-bloggers.com">R-bloggers.com</a>, respectively. They then display any new updates since the last time <code>~/.Rapp.history</code> was last updated, or from the last week if unable to establish when ~/.Rapp.history was last updated.
+
+<hr><h2>Compatibility</h2>
+The specific contents of the <code>items</code> returned will vary based on the specification of the feed used as well as the constructor used in generating the feed. An attempt is made to unify the format of basic fields (published date, categories, description, etc.), but less common fields may differ (with the Atom specification diverging from the base RSS fields)
+
+<hr><h2>Issues</h2>
+Please create issues using the Github issue tracking. Reproducible examples and pull requests are most welcome.
