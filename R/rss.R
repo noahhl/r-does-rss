@@ -41,29 +41,41 @@ parseRSS <- function(content) {
 }
 
 AtomToRSS <- function(atom) {
-  item <- list()
-  item$title <- atom$title
+  item <- atom
   item$creator <-   atom$author
+  item$author <- NULL
   item$description <- atom$summary
-  item$link <- atom$origlink
+  item$summary <- NULL
   for (i in atom[grep("link", names(atom))]) {
     if (i["rel"] == "replies")
       item$comments <-i["href"]
   }
   for (i in atom[grep("category", names(atom))]) {
-      item$categories <- paste(item$categories, i['term'], sep =";")
+      item$categories <- paste(item$categories, i['term'], sep ="; ")
   }
   item$categories <- sub(";", "", item$categories)
+  item <- item[names(item) != "category"]  
   item$guid <- atom$id
+  item$id <- NULL
   item$pubDate <- as.POSIXlt(atom$published)
   item$source <-  atom$content$.attrs['base']
   return(item)
 }
 
 cleanRSS <- function(rss) {
-  tryCatch(rss$pubDate <- as.POSIXlt(rss$pubDate), error=function(e) {rss$pubDate <<- as.POSIXlt(rss$pubDate,format="%a, %d %b %Y %H:%M:%S")})
-  rss$link <- rss$origLink
-return(rss)
+  item <- rss
+  tryCatch(item$pubDate <- as.POSIXlt(rss$pubDate), 
+          error=function(e) {
+              item$pubDate <<- as.POSIXlt(rss$pubDate,format="%a, %d %b %Y %H:%M:%S")
+           })
+  for (i in rss[grep("category", names(rss))]) {
+      item$categories <- paste(item$categories, i, sep ="; ")
+  }
+  item$categories <- sub(";", "", item$categories)
+  item <- item[names(item) != "category"]
+  item$comments <- item$commentRss
+  item$commentRss <- NULL
+  return(item)
 }
 
 
@@ -76,3 +88,5 @@ cleanFeedURL <- function(feed) {
     }    
     return(feed)
 }
+
+
