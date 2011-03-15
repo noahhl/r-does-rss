@@ -66,7 +66,9 @@ cleanRSS <- function(rss) {
   item <- rss
   tryCatch(item$pubDate <- as.POSIXlt(rss$pubDate), 
           error=function(e) {
-              item$pubDate <<- as.POSIXlt(rss$pubDate,format="%a, %d %b %Y %H:%M:%S")
+              tryCatch(item$pubDate <<- as.POSIXlt(rss$pubDate,format="%a, %d %b %Y %H:%M:%S"), error=function(e) {
+                item$pubDate <- rss$pubDate
+              })
            })
   for (i in rss[grep("category", names(rss))]) {
       item$categories <- paste(item$categories, i, sep ="; ")
